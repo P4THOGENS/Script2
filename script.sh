@@ -21,16 +21,16 @@ option4() {
 
     case $app_name in
         "browser")
-            xdg-open "https://www.google.com"  # Opens default browser
+            xdg-open "https://www.google.com"  
             ;;
         "editor")
-            code .  # Opens VS Code in the current directory; replace with your preferred editor
+            code .  
             ;;
         "music")
-            rhythmbox &  # Opens the music player (replace with your preferred player)
+            rhythmbox &  
             ;;
         "filemanager")
-            nautilus &  # Opens the file manager (replace with your system's default)
+            nautilus &  
             ;;
         *)
             echo "Application not recognized. Try 'browser', 'editor', 'music', or 'filemanager'."
