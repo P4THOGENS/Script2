@@ -1,5 +1,8 @@
 #!/bin/bash
 
+options=("Display disk usage" "Show date and time" "List all running processes" "Enter the app you want to open (browser, editor, music, filemanager)" "Exit")
+apps=("browser" "editor" "music" "filemanager")
+
 option1() {
     echo "Option 1: Displaying disk usage..."
     df -h
@@ -19,32 +22,33 @@ option4() {
     echo "Enter the app you want to open (e.g., browser, editor, music, filemanager):"
     read app_name
 
-    case $app_name in
-        "browser")
-            xdg-open "https://www.google.com"  
-            ;;
-        "editor")
-            code .  
-            ;;
-        "music")
-            rhythmbox &  
-            ;;
-        "filemanager")
-            nautilus &  
-            ;;
-        *)
-            echo "Application not recognized. Try 'browser', 'editor', 'music', or 'filemanager'."
-            ;;
-    esac
+    if [[ " ${apps[@]} " =~ " ${app_name} " ]]; then
+        case $app_name in
+            "browser")
+                xdg-open "https://www.google.com"  
+                ;;
+            "editor")
+                code .  
+                ;;
+            "music")
+                rhythmbox &  
+                ;;
+            "filemanager")
+                nautilus &  
+                ;;
+        esac
+    else
+        echo "Application not recognized. Try 'browser', 'editor', 'music', or 'filemanager'."
+    fi
 }
 
 while true; do 
     echo "Please choose an option:"
-    echo "1. Display disk usage"
-    echo "2. Show date and time"
-    echo "3. List all running processes"
-    echo "4. Enter the app you want to open (browser, editor, music, filemanager)"
-    echo "5. Exit"
+
+    for i in "${!options[@]}"; do
+        echo "$((i+1)). ${options[$i]}"
+    done
+
     read -p "Enter your choice: " choice
 
     case $choice in
